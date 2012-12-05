@@ -2,16 +2,15 @@
 # WiLink connectivity chip on OMAPx platforms.
 
 PRODUCT_PACKAGES += uim-sysfs \
-	bt_sco_app \
 	kfmapp     \
-        BluetoothSCOApp \
         FmRxApp \
         FmTxApp \
         FmService \
         libfmradio \
         fmradioif \
         com.ti.fm.fmradioif.xml \
-        libbt-vendor
+        libbt-vendor \
+	ti-wpan-fw
 
 #copy firmware
 PRODUCT_COPY_FILES += \
