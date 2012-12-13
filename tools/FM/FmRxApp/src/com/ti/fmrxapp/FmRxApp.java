@@ -354,7 +354,7 @@ public class FmRxApp extends Activity implements View.OnClickListener,
        }
 
     }
-private void startup() {
+    private void startup() {
         //Log.i(TAG, "startup");
 
 
@@ -656,12 +656,12 @@ private void startup() {
                                  // Code for blocking call
                                mStatus = sFmRadio.rxSetBand(sBand);
                                 if (mStatus == false) {
-                            showAlert(getParent(), "FmRadio","Not able to setband!!!!");
+                            showAlert(FmRxApp.this, "FmRadio","Not able to setband!!!!");
                            } else {
                                 lastTunedFrequency = (float) lastTunedFrequency ;
                                  mStatus = sFmRadio.rxTune_nb((int)(lastTunedFrequency.floatValue()* 1000));
                             if (mStatus == false) {
-                                   showAlert(getParent(), "FmRadio","Not able to tune!!!!");
+                                   showAlert(FmRxApp.this, "FmRadio","Not able to tune!!!!");
                             }
                         }
 
@@ -669,7 +669,7 @@ private void startup() {
                        // Code for non blocking call
                       mStatus = sFmRadio.rxSetBand_nb(sBand);
                       if (mStatus == false) {
-                           showAlert(getParent(), "FmRadio","Not able to setband!!!!");
+                           showAlert(FmRxApp.this, "FmRadio","Not able to setband!!!!");
                           }
                    }
                 }
@@ -809,7 +809,7 @@ private void startup() {
 /*
                 mStatus = sFmRadio.rxEnableAudioRouting();
                     if (mStatus == false) {
-                        showAlert(getParent(), "FmRadio",
+                        showAlert(getParent(), "FmRadio",          //should be fixed by "FmRxApp.this" instead of "getParent()"
                                 "Not able to enable audio!!!!");
                     }
 */
@@ -895,7 +895,7 @@ private void startup() {
 
                 mStatus = sFmRadio.rxTune_nb((int)(lastTunedFrequency.floatValue()*1000));
                 if (mStatus == false) {
-                    showAlert(getParent(), "FmRadio", "Not able to tune!!!!");
+                    showAlert(FmRxApp.this, "FmRadio", "Not able to tune!!!!");
                 }
 
                 break;
@@ -1082,11 +1082,12 @@ private void startup() {
 
     /* Display alert dialog */
     public void showAlert(Context context, String title, String msg) {
-
-        new AlertDialog.Builder(context).setTitle(title).setIcon(
-                android.R.drawable.ic_dialog_alert).setMessage(msg)
-                .setNegativeButton(android.R.string.cancel, null).show();
-
+        new AlertDialog.Builder(context)
+                       .setTitle(title)
+                       .setIcon(android.R.drawable.ic_dialog_alert)
+                       .setMessage(msg)
+                       .setNegativeButton(android.R.string.cancel, null)
+                       .show();
     }
 
 
@@ -1133,7 +1134,7 @@ private void startup() {
                     lastTunedFrequency = (float) lastTunedFrequency ;
                     mStatus = sFmRadio.rxTune_nb((int)(lastTunedFrequency.floatValue()*1000));
                     if (mStatus == false) {
-                        showAlert(getParent(), "FmRadio", "Not able to tune!!!!");
+                        showAlert(this, "FmRadio", "Not able to tune!!!!");
                     }
 
                 }
@@ -1966,28 +1967,31 @@ if (MAKE_FM_APIS_BLOCKING == true) {
     }
 
     /* Get the stored frequency from the arraylist and tune to that frequency */
-    void tuneStationFrequency(String text) {
+    boolean tuneStationFrequency(String text) {
         try {
             float iFreq = Float.parseFloat(text);
             if (iFreq != 0) {
-                lastTunedFrequency = (float) iFreq ;
-                if (DBG)
-                Log.d(TAG, "lastTunedFrequency" + lastTunedFrequency);
-                mStatus = sFmRadio.rxTune_nb((int)(lastTunedFrequency.floatValue()*1000));
+                mStatus = sFmRadio.rxTune_nb((int)(iFreq*1000));
                 if (mStatus == false) {
-                    showAlert(getParent(), "FmRadio", "Not able to tune!!!!");
+                    showAlert(this, "FmRadio", "Not able to tune!!!!");
+                    return false;
                 }
+                if (DBG) {
+                    Log.d(TAG, "lastTunedFrequency" + lastTunedFrequency);
+                }
+                lastTunedFrequency = (float) iFreq ;
             } else {
-
                 new AlertDialog.Builder(this).setIcon(
                         android.R.drawable.ic_dialog_alert).setMessage(
                         "Enter valid frequency!!").setNegativeButton(
                         android.R.string.ok, null).show();
-
+                return false;
             }
         } catch (NumberFormatException nfe) {
             Log.e(TAG, "nfe");
+            return false;
         }
+        return true;
     }
 
     public void onClick(View v) {
@@ -2007,7 +2011,7 @@ if (MAKE_FM_APIS_BLOCKING == true) {
 
 //            try{
 //            if (mStatus == false) {
-//                showAlert(getParent(), "FmRadio",
+//                showAlert(getParent(), "FmRadio",          //should be fixed by "this" instead of "getParent()"
 //                        "Not able to disable audio!!!!");
 //            }
 //            }catch (NumberFormatException e) {
@@ -2155,9 +2159,9 @@ if (MAKE_FM_APIS_BLOCKING == true) {
     void updateStationDisplay(int index) {
         String tunedFreq = null;
         tunedFreq = GetStation(index);
-        tuneStationFrequency(tunedFreq);
-        txtFmRxTunedFreq.setText(tunedFreq.toString());
-
+        if (tuneStationFrequency(tunedFreq)) {
+            txtFmRxTunedFreq.setText(tunedFreq.toString());
+        }
     }
 
     /* Creates the menu items */
@@ -2207,7 +2211,7 @@ if (MAKE_FM_APIS_BLOCKING == true) {
              */
 //            mStatus = sFmRadio.rxDisableAudioRouting();
 //            if (mStatus == false) {
-//                showAlert(getParent(), "FmRadio",
+//                showAlert(getParent(), "FmRadio",            //should be fixed by "this" instead of "getParent()"
 //                        "Not able to disable audio!!!!");
 //            }
 //            Log.d(TAG, "MENU_EXIT ------------------- 2");
