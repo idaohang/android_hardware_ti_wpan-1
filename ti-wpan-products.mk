@@ -12,17 +12,16 @@ PRODUCT_PACKAGES += uim-sysfs \
         libbt-vendor \
 	ti-wpan-fw
 
-#copy firmware
-PRODUCT_COPY_FILES += \
-  device/ti/proprietary-open/wl12xx/wpan/bluetooth/TIInit_10.6.15.bts:system/etc/firmware/TIInit_10.6.15.bts \
-  device/ti/proprietary-open/wl12xx/wpan/bluetooth/TIInit_7.2.31.bts:system/etc/firmware/TIInit_7.2.31.bts \
-  device/ti/proprietary-open/wl12xx/wpan/bluetooth/TIInit_7.6.15.bts:system/etc/firmware/TIInit_7.6.15.bts \
-  device/ti/proprietary-open/wl12xx/wpan/bluetooth/TIInit_12.7.27.bts:system/etc/firmware/TIInit_12.7.27.bts \
-  device/ti/proprietary-open/wl12xx/wpan/fmradio/fmc_ch8_1283.2.bts:system/etc/firmware/fmc_ch8_1283.2.bts \
-  device/ti/proprietary-open/wl12xx/wpan/fmradio/fm_rx_ch8_1283.2.bts:system/etc/firmware/fm_rx_ch8_1283.2.bts \
-  device/ti/proprietary-open/wl12xx/wpan/fmradio/fm_tx_ch8_1283.2.bts:system/etc/firmware/fm_tx_ch8_1283.2.bts \
-  device/ti/proprietary-open/wl12xx/wpan/fmradio/fmc_init_1273.2.bts:system/etc/firmware/fmc_init_1273.2.bts \
-  device/ti/proprietary-open/wl12xx/wpan/fmradio/fm_rx_init_1273.2.bts:system/etc/firmware/fm_rx_init_1273.2.bts \
-  device/ti/proprietary-open/wl12xx/wpan/fmradio/fm_tx_init_1273.2.bts:system/etc/firmware/fm_tx_init_1273.2.bts \
-  device/ti/proprietary-open/wl12xx/wpan/fmradio/fm_tx_ch8_1273.1.bts:system/etc/firmware/fm_tx_ch8_1273.1.bts \
-  device/ti/proprietary-open/wl12xx/wpan/fmradio/fm_tx_ch8_1273.2.bts:system/etc/firmware/fm_tx_ch8_1273.2.bts
+#NFC
+PRODUCT_PACKAGES += \
+    libnfc \
+    libnfc_ndef \
+    libnfc_jni \
+    Nfc \
+    NFCDemo \
+    Tag \
+    TagTests \
+    TagCanon \
+    AndroidBeamDemo \
+    NfcExtrasTests \
+    com.android.nfc_extras
