@@ -10,7 +10,8 @@ PRODUCT_PACKAGES += uim-sysfs \
         fmradioif \
         com.ti.fm.fmradioif.xml \
         libbt-vendor \
-	ti-wpan-fw
+	ti-wpan-fw \
+	BluetoothSCOApp
 
 #NFC
 PRODUCT_PACKAGES += \
