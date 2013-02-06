@@ -15,6 +15,9 @@
 #
 
 LOCAL_PATH := $(call my-dir)
+
+ifneq ($(BOARD_HAVE_BLUETOOTH_TI),)
+
 BLUEDROID_PATH := external/bluetooth/bluedroid/
 include $(CLEAR_VARS)
 
@@ -37,3 +40,5 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_PATH := $(ANDROID_PRODUCT_OUT)/system/vendor/lib
 
 include $(BUILD_SHARED_LIBRARY)
+
+endif
