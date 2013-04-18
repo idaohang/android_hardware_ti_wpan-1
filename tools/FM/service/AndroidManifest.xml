@@ -38,11 +38,6 @@
                 <action android:name="com.ti.server.FmService" />
             </intent-filter>
         </service>
-        <receiver android:name=".BootReceiver">
-            <intent-filter>
-                <action android:name ="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
     </application>
     <uses-sdk android:minSdkVersion="4" />
 </manifest>
