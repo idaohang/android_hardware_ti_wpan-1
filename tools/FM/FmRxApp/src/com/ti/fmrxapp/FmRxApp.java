@@ -116,9 +116,9 @@ public class FmRxApp extends Activity implements View.OnClickListener,
     private ImageButton imgFmSeekUp, imgFmSeekDown;
     private TextView txtStatusMsg, txtRadioText;
     private TextView txtPsText;
-    static TextView txtStationName;
-    private static Button btnStation1, btnStation2, btnStation3;
-    private static Button btnStation4, btnStation5, btnStation6;
+    private TextView txtStationName;
+    private Button btnStation1, btnStation2, btnStation3;
+    private Button btnStation4, btnStation5, btnStation6;
     private ProgressDialog pd = null, configPd;
 
     /********************************************
@@ -184,8 +184,8 @@ public class FmRxApp extends Activity implements View.OnClickListener,
 
     private NotificationManager mNotificationManager;
 
-    static final String FM_INTERRUPTED_KEY = "fm_interrupted";
-    static final String FM_STATE_KEY = "fm_state";
+    final String FM_INTERRUPTED_KEY = "fm_interrupted";
+    final String FM_STATE_KEY = "fm_state";
     /* Flag to know whether FM App was interrupted due to orientation change */
     boolean mFmInterrupted = false;
 
@@ -201,9 +201,9 @@ public class FmRxApp extends Activity implements View.OnClickListener,
     public static FmRadio sFmRadio;
 
     /** Arraylist of stations */
-    public static ArrayList<HashMap<String, String>> stations = new ArrayList<HashMap<String, String>>(
+    public ArrayList<HashMap<String, String>> stations = new ArrayList<HashMap<String, String>>(
             6);
-    public static TextView txtFmRxTunedFreq;
+    public TextView txtFmRxTunedFreq;
     private OrientationListener mOrientationListener;
 
     Context mContext;
@@ -439,7 +439,7 @@ public class FmRxApp extends Activity implements View.OnClickListener,
      * Set the arraylist with the selected station name and display the name on
      * main screen
      */
-    public static void UpdateRenameStation(int index, String name) {
+    public void UpdateRenameStation(int index, String name) {
         txtStationName.setText(name.toString());
         // Store the name in the selected index in Arraylist
         SetStation(index, "", name);
@@ -450,7 +450,7 @@ public class FmRxApp extends Activity implements View.OnClickListener,
      * Set the arraylist and the buttons with the selected station and make the
      * button enabled so that user can select it to select the stored stations
      */
-    public static void updateSetStation(int index, String freq, String name) {
+    public void updateSetStation(int index, String freq, String name) {
         switch (index) {
         case 0:
             if (freq.equals(""))
@@ -515,7 +515,7 @@ public class FmRxApp extends Activity implements View.OnClickListener,
      * button disabled so that user cannot select it
      */
 
-    public static void updateUnSetStation(int index) {
+    public void updateUnSetStation(int index) {
         switch (index) {
         case 0:
             btnStation1.setEnabled(false);
@@ -549,7 +549,7 @@ public class FmRxApp extends Activity implements View.OnClickListener,
     }
 
     /* Set particular station name or frequency in the stations arraylist */
-    public static void SetStation(Integer index, String freq, String name) {
+    public void SetStation(Integer index, String freq, String name) {
         Log.i(TAG, "SetStation");
         Integer pos = new Integer(index.intValue() + 1);
         try {
@@ -576,7 +576,7 @@ public class FmRxApp extends Activity implements View.OnClickListener,
     }
 
     /* UnSet particular station name and frequency in the stations arraylist */
-    public static void UnSetStation(Integer index, String freq, String name) {
+    public void UnSetStation(Integer index, String freq, String name) {
        Log.i(TAG, "UnSetStation");
        Integer pos = new Integer(index.intValue() + 1);
        try {
@@ -592,7 +592,7 @@ public class FmRxApp extends Activity implements View.OnClickListener,
 
     /* Get particular station from the stations arraylist */
 
-    public static String GetStation(Integer index) {
+    public String GetStation(Integer index) {
         Log.i(TAG, "GetStation");
         Integer pos = new Integer(index.intValue() + 1);
         try {
