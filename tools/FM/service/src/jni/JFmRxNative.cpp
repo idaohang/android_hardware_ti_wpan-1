@@ -1061,7 +1061,7 @@ static int  nativeJFmRx_DisableAudioRouting(JNIEnv *env, jobject obj,jlong jCont
    int status = 0 ;
     V4L2_JBTL_LOGD("nativeJFmRx_disableAudioRouting(): Entered");
 
-   nativeJFmRx_Callback(jContext,status, FM_RX_CMD_ENABLE_AUDIO,status);
+   nativeJFmRx_Callback(jContext,status, FM_RX_CMD_DISABLE_AUDIO,status);
 
     V4L2_JBTL_LOGD("nativeJFmRx_disableAudioRouting(): Exit");
      return FM_PENDING;
